@@ -13,15 +13,18 @@ def crop_image(image, crop_rect):
     left, top, right, bottom = (int(x) for x in crop_rect.split(','))
     return image.crop((left, top, right, bottom))
 
+
 def apply_mask(image, mask_filename):
     mask = Image.open(mask_filename)
     image.paste(mask, (0, 0), mask)
     return image
 
+
 def resize_image(image, scaleup):
     width, height = image.size
     scaleup_int = int(scaleup)
     return image.resize((width * scaleup_int, height * scaleup_int))
+
 
 def apply_image_corrections(image_as_array):
     grey = cv2.cvtColor(image_as_array, cv2.COLOR_BGR2GRAY)
@@ -30,6 +33,7 @@ def apply_image_corrections(image_as_array):
     kernel = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (2, 2))
     closing = cv2.morphologyEx(dilated, cv2.MORPH_CLOSE, kernel)
     return closing
+
 
 def detect_cars(image, detection_xml, is_apply_corrections):
     original_image = np.array(image)
