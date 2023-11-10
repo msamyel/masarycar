@@ -56,12 +56,12 @@ def detect_cars(image, detection_xml, is_apply_corrections):
 
 def main():
     arg_parser = argparse.ArgumentParser()
-    arg_parser.add_argument("-f", "--file", help="path to image to use")
-    arg_parser.add_argument("-c", "--croprect", help="left,top,right,bottom")
-    arg_parser.add_argument("-m", "--mask", help="path to mask file")
-    arg_parser.add_argument("-u", "--scaleup", help="scale of original picture magnify")
-    arg_parser.add_argument("-a", "--apply-corrections", help="1/0 to apply corrections to original image")
-    arg_parser.add_argument("-d", "--detection", help="path to detection XML")
+    arg_parser.add_argument("-f", "--file", help="path to image to use", required=True)
+    arg_parser.add_argument("-c", "--croprect", help="left,top,right,bottom", required=True)
+    arg_parser.add_argument("-m", "--mask", help="path to mask file", required=True)
+    arg_parser.add_argument("-u", "--scaleup", help="scale of original picture magnify", default=1)
+    arg_parser.add_argument("-a", "--apply-corrections", help="1/0 to apply corrections to original image", default=1)
+    arg_parser.add_argument("-d", "--detection", help="path to detection XML", required=True)
     args = arg_parser.parse_args()
 
     image = get_image(args.file)
