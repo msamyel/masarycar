@@ -11,7 +11,7 @@ pip install -r requirements.txt
 Next run the script:
 ```
 python main.py  -f "src/sample01.jpeg" \
-                -c "27,172,363,686" \
+                -c "193,440,529,954" \
                 -m "src/mask.png" \
                 -u 5 \
                 -a 1 \

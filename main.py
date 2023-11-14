@@ -57,7 +57,7 @@ def detect_cars(image, detection_xml, is_apply_corrections):
 def main():
     arg_parser = argparse.ArgumentParser()
     arg_parser.add_argument("-f", "--file", help="path to image to use", required=True)
-    arg_parser.add_argument("-c", "--croprect", help="left,top,right,bottom", required=True)
+    arg_parser.add_argument("-c", "--croprect", help="left,top,right,bottom", default="193,440,529,954")
     arg_parser.add_argument("-m", "--mask", help="path to mask file", required=True)
     arg_parser.add_argument("-u", "--scaleup", help="scale of original picture magnify", default=1)
     arg_parser.add_argument("-a", "--apply-corrections", help="1/0 to apply corrections to original image", default=1)
@@ -72,8 +72,6 @@ def main():
 
     plt.imshow(detection_img, interpolation='nearest')
     plt.show()
-
-
 
 
 if __name__ == '__main__':
