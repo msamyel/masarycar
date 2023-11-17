@@ -95,19 +95,19 @@ def detect_cars(original_image, corrected_image, detection_xml, is_apply_correct
     car_cascade = cv2.CascadeClassifier(detection_xml)
 
     cars = car_cascade.detectMultiScale(corrected_image_arr, 1.1, 1)
-    cnt = 0
+    car_count = 0
     for (x, y, w, h) in cars:
-        cv2.rectangle(original_image_arr, (x, y), (x + w, y + h), (255, 0, 0), 2)
-        cnt += 1
-    print(cnt, "cars found")
+        cv2.rectangle(original_image_arr, (x, y), (x + w, y + h), (255, 0, 0), 5)
+        car_count += 1
+    print(car_count, "cars found")
 
-    return original_image_arr
+    return car_count, original_image_arr
 
 
 def main():
     arg_parser = argparse.ArgumentParser()
     arg_parser.add_argument("-f", "--file", help="path to image to use", default="__none")
-    arg_parser.add_argument("-c", "--croprect", help="left,top,right,bottom", default="193,440,529,954")
+    arg_parser.add_argument("-c", "--croprect", help="left,top,right,bottom", default="195,450,850,1080")
     arg_parser.add_argument("-m", "--mask", help="path to mask file", required=True)
     arg_parser.add_argument("-u", "--scaleup", help="scale of original picture magnify", default=1)
     arg_parser.add_argument("-a", "--apply-corrections", help="1/0 to apply corrections to original image", default=1)
@@ -126,7 +126,7 @@ def main():
     masked_image = apply_mask(cropped_image, args.mask)
     resized_image = resize_image(masked_image, args.scaleup)
     original_resized_image = resize_image(cropped_image, args.scaleup)
-    detection_img = detect_cars(original_resized_image, resized_image, args.detection, args.apply_corrections)
+    car_count, detection_img = detect_cars(original_resized_image, resized_image, args.detection, args.apply_corrections)
 
     plt.imshow(detection_img, interpolation='nearest')
     plt.show()
